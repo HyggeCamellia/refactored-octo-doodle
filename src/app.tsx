@@ -41,13 +41,21 @@ export async function getInitialState(): Promise<{
       } as API.CurrentUser;
     } catch (error) {
       console.log(error);
-      history.push(PageEnum.LOGIN);
+      // 只有在没有token的情况下才重定向到登录页面
+      const token = getAccessToken();
+      const { location } = history;
+      if (!token && location.pathname !== PageEnum.LOGIN) {
+        history.push(PageEnum.LOGIN);
+      }
     }
     return undefined;
   };
-  // 如果不是登录页面，执行
+  
+  const token = getAccessToken();
   const { location } = history;
-  if (location.pathname !== PageEnum.LOGIN) {
+  
+  // 如果有token或者不在登录页面，尝试获取用户信息
+  if (token || location.pathname !== PageEnum.LOGIN) {
     const currentUser = await fetchUserInfo();
     return {
       fetchUserInfo,
@@ -55,6 +63,7 @@ export async function getInitialState(): Promise<{
       settings: defaultSettings as Partial<LayoutSettings>,
     };
   }
+  
   return {
     fetchUserInfo,
     settings: defaultSettings as Partial<LayoutSettings>,
@@ -184,14 +193,25 @@ export async function patchClientRoutes({ routes }:any) {
 export function render(oldRender: () => void) {
   // console.log("render",history.location)
   const token = getAccessToken();
-  if(!token || token?.length === 0) {
+  const { location } = history;
+  
+  // 如果有token且不在登录页面，直接跳转到数字货币投资系统概览页面
+  if(token && token?.length > 0) {
+    if(location.pathname !== '/crypto/overview' && location.pathname !== PageEnum.LOGIN) {
+      history.replace('/crypto/overview');
+      return;
+    }
+    // 有token时，直接加载路由信息并渲染，避免闪烁
+    getRoutersInfo().then(res => {
+      setRemoteMenu(res);
+      oldRender();
+    }).catch(() => {
+      // 加载失败时仍然渲染
+      oldRender();
+    });
+  } else {
     oldRender();
-    return;
   }
-  getRoutersInfo().then(res => {
-    setRemoteMenu(res);
-    oldRender()
-  });
 }
 
 /**

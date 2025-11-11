@@ -13,9 +13,34 @@
 export default [
   {
     path: '/',
-    name: '首页',
-    layout: false,
-    component: './home/HomePage',
+    redirect: '/crypto/overview',
+  },
+  {
+    name: '数字货币投资',
+    path: '/crypto',
+    icon: 'GoldOutlined',
+    routes: [
+      {
+        name: '系统概览',
+        path: '/crypto/overview',
+        component: './CryptoInvestment/Overview',
+      },
+      {
+        name: '消息列表',
+        path: '/crypto/news-list',
+        component: './CryptoInvestment/NewsList',
+      },
+      {
+        name: '持仓数据',
+        path: '/crypto/portfolio',
+        component: './CryptoInvestment/Portfolio',
+      },
+      {
+        name: '建议报告',
+        path: '/crypto/recommendations',
+        component: './CryptoInvestment/Recommendations',
+      },
+    ],
   },
   {
     name: '演示',

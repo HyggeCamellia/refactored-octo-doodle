@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkant_design_pro=self.webpackChunkant_design_pro||[]).push([[5344],{65344:function(s,e,n){n.r(e);var a=n(85893),u=function(){return(0,a.jsx)("div",{children:"WarehouseManage"})};e.default=u}}]);
