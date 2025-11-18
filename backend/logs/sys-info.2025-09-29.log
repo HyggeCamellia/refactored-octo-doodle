@@ -1,0 +1,112 @@
+2025-09-29 18:11:31 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-09-29 18:11:31 [main] INFO  com.ruoyi.RuoYiApplication - Starting RuoYiApplication using Java 17.0.12 with PID 12244 (D:\download\backend\ruoyi-admin-wms\target\classes started by hls30 in D:\download\backend)
+2025-09-29 18:11:31 [main] INFO  com.ruoyi.RuoYiApplication - The following 1 profile is active: "dev"
+2025-09-29 18:11:36 [main] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2025-09-29 18:11:37 [main] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource detect P6SPY plugin and enabled it
+2025-09-29 18:11:37 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2025-09-29 18:11:38 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@638d624a
+2025-09-29 18:11:38 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2025-09-29 18:11:38 [main] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2025-09-29 18:11:38 [main] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2025-09-29 18:11:41 [main] INFO  c.r.common.redis.config.RedisConfig - 初始化 redis 配置
+2025-09-29 18:11:41 [main] INFO  org.redisson.Version - Redisson 3.29.0
+2025-09-29 18:11:42 [redisson-netty-1-5] INFO  o.r.connection.ConnectionsHolder - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2025-09-29 18:11:42 [redisson-netty-1-3] INFO  o.r.connection.ConnectionsHolder - 8 connections initialized for 127.0.0.1/127.0.0.1:6379
+2025-09-29 18:11:43 [main] INFO  c.r.common.json.config.JacksonConfig - 初始化 jackson 配置
+2025-09-29 18:11:45 [main] INFO  io.undertow - starting server: Undertow - 2.3.13.Final
+2025-09-29 18:11:45 [main] INFO  org.xnio - XNIO version 3.8.8.Final
+2025-09-29 18:11:45 [main] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
+2025-09-29 18:11:45 [main] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
+2025-09-29 18:11:45 [main] INFO  com.ruoyi.RuoYiApplication - Started RuoYiApplication in 14.545 seconds (process running for 15.526)
+2025-09-29 18:11:45 [main] INFO  p6spy - 2025-09-29 18:11:45|20|statement|connection 0|url jdbc:mysql://127.0.0.5:3306/aaa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true|SELECT  oss_config_id,config_key,access_key,secret_key,bucket_name,prefix,endpoint,domain,is_https,region,status,ext1,remark,access_policy,create_by,create_time,update_by,update_time  FROM sys_oss_config|SELECT  oss_config_id,config_key,access_key,secret_key,bucket_name,prefix,endpoint,domain,is_https,region,status,ext1,remark,access_policy,create_by,create_time,update_by,update_time  FROM sys_oss_config
+2025-09-29 18:11:45 [main] INFO  c.r.s.runner.SystemApplicationRunner - 初始化OSS配置成功
+2025-09-29 18:11:45 [main] INFO  p6spy - 2025-09-29 18:11:45|1|statement|connection 1|url jdbc:mysql://127.0.0.5:3306/aaa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true|SELECT  config_id,config_name,config_key,config_value,config_type,remark,create_by,create_time,update_by,update_time  FROM sys_config           ORDER BY config_id ASC|SELECT  config_id,config_name,config_key,config_value,config_type,remark,create_by,create_time,update_by,update_time  FROM sys_config           ORDER BY config_id ASC
+2025-09-29 18:11:45 [main] INFO  c.r.s.runner.SystemApplicationRunner - 加载参数缓存数据成功
+2025-09-29 18:11:45 [main] INFO  p6spy - 2025-09-29 18:11:45|3|statement|connection 2|url jdbc:mysql://127.0.0.5:3306/aaa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true|SELECT  dict_code,dict_sort,dict_label,dict_value,dict_type,css_class,list_class,is_default,status,remark,create_by,create_time,update_by,update_time  FROM sys_dict_data      WHERE  (status = ?)|SELECT  dict_code,dict_sort,dict_label,dict_value,dict_type,css_class,list_class,is_default,status,remark,create_by,create_time,update_by,update_time  FROM sys_dict_data      WHERE  (status = '1')
+2025-09-29 18:11:45 [main] INFO  c.r.s.runner.SystemApplicationRunner - 加载字典缓存数据成功
+2025-09-29 18:11:53 [SpringApplicationShutdownHook] INFO  io.undertow - stopping server: Undertow - 2.3.13.Final
+2025-09-29 18:11:53 [SpringApplicationShutdownHook] INFO  c.r.c.core.config.ThreadPoolConfig - ====关闭后台任务任务线程池====
+2025-09-29 18:11:53 [SpringApplicationShutdownHook] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource start closing ....
+2025-09-29 18:11:53 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown initiated...
+2025-09-29 18:11:53 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown completed.
+2025-09-29 18:11:53 [SpringApplicationShutdownHook] INFO  c.b.d.d.d.DefaultDataSourceDestroyer - dynamic-datasource close the datasource named [master] success,
+2025-09-29 18:11:53 [SpringApplicationShutdownHook] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource all closed success,bye
+2025-09-29 18:15:59 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-09-29 18:15:59 [main] INFO  com.ruoyi.RuoYiApplication - Starting RuoYiApplication using Java 17.0.12 with PID 20712 (D:\download\backend\ruoyi-admin-wms\target\classes started by hls30 in D:\download\backend)
+2025-09-29 18:15:59 [main] INFO  com.ruoyi.RuoYiApplication - The following 1 profile is active: "dev"
+2025-09-29 18:16:06 [main] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2025-09-29 18:16:07 [main] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource detect P6SPY plugin and enabled it
+2025-09-29 18:16:07 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2025-09-29 18:16:08 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@43b74979
+2025-09-29 18:16:08 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2025-09-29 18:16:08 [main] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2025-09-29 18:16:08 [main] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2025-09-29 18:16:12 [main] INFO  c.r.common.redis.config.RedisConfig - 初始化 redis 配置
+2025-09-29 18:16:12 [main] INFO  org.redisson.Version - Redisson 3.29.0
+2025-09-29 18:16:12 [redisson-netty-1-4] INFO  o.r.connection.ConnectionsHolder - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2025-09-29 18:16:12 [redisson-netty-1-3] INFO  o.r.connection.ConnectionsHolder - 8 connections initialized for 127.0.0.1/127.0.0.1:6379
+2025-09-29 18:16:14 [main] INFO  c.r.common.json.config.JacksonConfig - 初始化 jackson 配置
+2025-09-29 18:16:16 [main] INFO  io.undertow - starting server: Undertow - 2.3.13.Final
+2025-09-29 18:16:16 [main] INFO  org.xnio - XNIO version 3.8.8.Final
+2025-09-29 18:16:17 [main] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
+2025-09-29 18:16:17 [main] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
+2025-09-29 18:16:17 [main] INFO  com.ruoyi.RuoYiApplication - Started RuoYiApplication in 18.605 seconds (process running for 19.912)
+2025-09-29 18:16:17 [main] INFO  p6spy - 2025-09-29 18:16:17|9|statement|connection 0|url jdbc:mysql://127.0.0.5:3306/aaa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true|SELECT  oss_config_id,config_key,access_key,secret_key,bucket_name,prefix,endpoint,domain,is_https,region,status,ext1,remark,access_policy,create_by,create_time,update_by,update_time  FROM sys_oss_config|SELECT  oss_config_id,config_key,access_key,secret_key,bucket_name,prefix,endpoint,domain,is_https,region,status,ext1,remark,access_policy,create_by,create_time,update_by,update_time  FROM sys_oss_config
+2025-09-29 18:16:17 [main] INFO  c.r.s.runner.SystemApplicationRunner - 初始化OSS配置成功
+2025-09-29 18:16:17 [main] INFO  p6spy - 2025-09-29 18:16:17|1|statement|connection 1|url jdbc:mysql://127.0.0.5:3306/aaa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true|SELECT  config_id,config_name,config_key,config_value,config_type,remark,create_by,create_time,update_by,update_time  FROM sys_config           ORDER BY config_id ASC|SELECT  config_id,config_name,config_key,config_value,config_type,remark,create_by,create_time,update_by,update_time  FROM sys_config           ORDER BY config_id ASC
+2025-09-29 18:16:17 [main] INFO  c.r.s.runner.SystemApplicationRunner - 加载参数缓存数据成功
+2025-09-29 18:16:17 [main] INFO  p6spy - 2025-09-29 18:16:17|2|statement|connection 2|url jdbc:mysql://127.0.0.5:3306/aaa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true|SELECT  dict_code,dict_sort,dict_label,dict_value,dict_type,css_class,list_class,is_default,status,remark,create_by,create_time,update_by,update_time  FROM sys_dict_data      WHERE  (status = ?)|SELECT  dict_code,dict_sort,dict_label,dict_value,dict_type,css_class,list_class,is_default,status,remark,create_by,create_time,update_by,update_time  FROM sys_dict_data      WHERE  (status = '1')
+2025-09-29 18:16:17 [main] INFO  c.r.s.runner.SystemApplicationRunner - 加载字典缓存数据成功
+2025-09-29 18:17:41 [XNIO-1 task-2] INFO  io.undertow.servlet - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-29 18:17:41 [XNIO-1 task-2] INFO  c.r.c.w.i.PlusWebInvokeTimeInterceptor - [PLUS]开始请求 => URL[POST /wms/demo/testbody],参数类型[json],参数:[{
+    "name":"aaaaaaaaaaaa",
+    "age":18
+}]
+2025-09-29 18:17:54 [SpringApplicationShutdownHook] INFO  io.undertow - stopping server: Undertow - 2.3.13.Final
+2025-09-29 18:17:54 [SpringApplicationShutdownHook] INFO  io.undertow.servlet - Destroying Spring FrameworkServlet 'dispatcherServlet'
+2025-09-29 18:17:54 [SpringApplicationShutdownHook] INFO  c.r.c.core.config.ThreadPoolConfig - ====关闭后台任务任务线程池====
+2025-09-29 18:17:54 [SpringApplicationShutdownHook] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource start closing ....
+2025-09-29 18:17:54 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown initiated...
+2025-09-29 18:17:54 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown completed.
+2025-09-29 18:17:54 [SpringApplicationShutdownHook] INFO  c.b.d.d.d.DefaultDataSourceDestroyer - dynamic-datasource close the datasource named [master] success,
+2025-09-29 18:17:54 [SpringApplicationShutdownHook] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource all closed success,bye
+2025-09-29 18:17:57 [background-preinit] INFO  o.h.validator.internal.util.Version - HV000001: Hibernate Validator 8.0.1.Final
+2025-09-29 18:17:57 [main] INFO  com.ruoyi.RuoYiApplication - Starting RuoYiApplication using Java 17.0.12 with PID 8844 (D:\download\backend\ruoyi-admin-wms\target\classes started by hls30 in D:\download\backend)
+2025-09-29 18:17:57 [main] INFO  com.ruoyi.RuoYiApplication - The following 1 profile is active: "dev"
+2025-09-29 18:18:03 [main] INFO  io.undertow.servlet - Initializing Spring embedded WebApplicationContext
+2025-09-29 18:18:03 [main] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource detect P6SPY plugin and enabled it
+2025-09-29 18:18:04 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Starting...
+2025-09-29 18:18:04 [main] INFO  com.zaxxer.hikari.pool.HikariPool - master - Added connection com.mysql.cj.jdbc.ConnectionImpl@5c46a957
+2025-09-29 18:18:04 [main] INFO  com.zaxxer.hikari.HikariDataSource - master - Start completed.
+2025-09-29 18:18:04 [main] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource - add a datasource named [master] success
+2025-09-29 18:18:04 [main] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource initial loaded [1] datasource,primary datasource named [master]
+2025-09-29 18:18:08 [main] INFO  c.r.common.redis.config.RedisConfig - 初始化 redis 配置
+2025-09-29 18:18:08 [main] INFO  org.redisson.Version - Redisson 3.29.0
+2025-09-29 18:18:09 [redisson-netty-1-4] INFO  o.r.connection.ConnectionsHolder - 1 connections initialized for 127.0.0.1/127.0.0.1:6379
+2025-09-29 18:18:09 [redisson-netty-1-3] INFO  o.r.connection.ConnectionsHolder - 8 connections initialized for 127.0.0.1/127.0.0.1:6379
+2025-09-29 18:18:10 [main] INFO  c.r.common.json.config.JacksonConfig - 初始化 jackson 配置
+2025-09-29 18:18:12 [main] INFO  io.undertow - starting server: Undertow - 2.3.13.Final
+2025-09-29 18:18:12 [main] INFO  org.xnio - XNIO version 3.8.8.Final
+2025-09-29 18:18:12 [main] INFO  org.xnio.nio - XNIO NIO Implementation Version 3.8.8.Final
+2025-09-29 18:18:12 [main] INFO  org.jboss.threads - JBoss Threads version 3.5.0.Final
+2025-09-29 18:18:13 [main] INFO  com.ruoyi.RuoYiApplication - Started RuoYiApplication in 16.219 seconds (process running for 17.15)
+2025-09-29 18:18:13 [main] INFO  p6spy - 2025-09-29 18:18:13|10|statement|connection 0|url jdbc:mysql://127.0.0.5:3306/aaa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true|SELECT  oss_config_id,config_key,access_key,secret_key,bucket_name,prefix,endpoint,domain,is_https,region,status,ext1,remark,access_policy,create_by,create_time,update_by,update_time  FROM sys_oss_config|SELECT  oss_config_id,config_key,access_key,secret_key,bucket_name,prefix,endpoint,domain,is_https,region,status,ext1,remark,access_policy,create_by,create_time,update_by,update_time  FROM sys_oss_config
+2025-09-29 18:18:13 [main] INFO  c.r.s.runner.SystemApplicationRunner - 初始化OSS配置成功
+2025-09-29 18:18:13 [main] INFO  p6spy - 2025-09-29 18:18:13|0|statement|connection 1|url jdbc:mysql://127.0.0.5:3306/aaa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true|SELECT  config_id,config_name,config_key,config_value,config_type,remark,create_by,create_time,update_by,update_time  FROM sys_config           ORDER BY config_id ASC|SELECT  config_id,config_name,config_key,config_value,config_type,remark,create_by,create_time,update_by,update_time  FROM sys_config           ORDER BY config_id ASC
+2025-09-29 18:18:13 [main] INFO  c.r.s.runner.SystemApplicationRunner - 加载参数缓存数据成功
+2025-09-29 18:18:13 [main] INFO  p6spy - 2025-09-29 18:18:13|2|statement|connection 2|url jdbc:mysql://127.0.0.5:3306/aaa?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8&autoReconnect=true&rewriteBatchedStatements=true|SELECT  dict_code,dict_sort,dict_label,dict_value,dict_type,css_class,list_class,is_default,status,remark,create_by,create_time,update_by,update_time  FROM sys_dict_data      WHERE  (status = ?)|SELECT  dict_code,dict_sort,dict_label,dict_value,dict_type,css_class,list_class,is_default,status,remark,create_by,create_time,update_by,update_time  FROM sys_dict_data      WHERE  (status = '1')
+2025-09-29 18:18:13 [main] INFO  c.r.s.runner.SystemApplicationRunner - 加载字典缓存数据成功
+2025-09-29 18:18:16 [XNIO-1 task-2] INFO  io.undertow.servlet - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-09-29 18:18:17 [XNIO-1 task-2] INFO  c.r.c.w.i.PlusWebInvokeTimeInterceptor - [PLUS]开始请求 => URL[POST /wms/demo/testbody],参数类型[json],参数:[{
+    "name":"aaaaaaaaaaaa",
+    "age":18
+}]
+2025-09-29 18:18:21 [XNIO-1 task-2] INFO  c.r.c.w.i.PlusWebInvokeTimeInterceptor - [PLUS]结束请求 => URL[POST /wms/demo/testbody],耗时:[4446]毫秒
+2025-09-29 18:19:09 [SpringApplicationShutdownHook] INFO  io.undertow - stopping server: Undertow - 2.3.13.Final
+2025-09-29 18:19:09 [SpringApplicationShutdownHook] INFO  io.undertow.servlet - Destroying Spring FrameworkServlet 'dispatcherServlet'
+2025-09-29 18:19:09 [SpringApplicationShutdownHook] INFO  c.r.c.core.config.ThreadPoolConfig - ====关闭后台任务任务线程池====
+2025-09-29 18:19:09 [SpringApplicationShutdownHook] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource start closing ....
+2025-09-29 18:19:09 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown initiated...
+2025-09-29 18:19:09 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - master - Shutdown completed.
+2025-09-29 18:19:09 [SpringApplicationShutdownHook] INFO  c.b.d.d.d.DefaultDataSourceDestroyer - dynamic-datasource close the datasource named [master] success,
+2025-09-29 18:19:09 [SpringApplicationShutdownHook] INFO  c.b.d.d.DynamicRoutingDataSource - dynamic-datasource all closed success,bye
