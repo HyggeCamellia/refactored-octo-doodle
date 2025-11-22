@@ -2,15 +2,18 @@ package com.ruoyi.wms.domain.vo;
 
 import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.ruoyi.wms.domain.entity.CaseInfo;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
-import com.ruoyi.wms.domain.entity.CaseInfo;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
- * 教学案例信息视图对象 case_info
+ * 案例信息Vo
+ * 
+ * @author ruoyi
  */
 @Data
 @ExcelIgnoreUnannotated
@@ -21,44 +24,74 @@ public class CaseInfoVo implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     * 主键ID
+     */
+    @ExcelProperty(value = "主键ID")
+    private Long id;
+
+    /**
      * 案例编码
      */
     @ExcelProperty(value = "案例编码")
     private String caseCode;
 
     /**
-     * 单位名称
+     * 案例名称
      */
-    @ExcelProperty(value = "单位名称")
+    @ExcelProperty(value = "案例名称")
     private String caseName;
 
     /**
-     * 承办单位
+     * 承担单位
      */
-    @ExcelProperty(value = "承办单位")
+    @ExcelProperty(value = "承担单位")
     private String undertakingUnit;
 
     /**
-     * 案件类型（以AULX_开头的代码）
+     * 案例类型
      */
-    @ExcelProperty(value = "案件类型")
+    @ExcelProperty(value = "案例类型")
     private String caseType;
 
     /**
-     * 案件来源（以AULX_开头的代码）
+     * 案例来源
      */
-    @ExcelProperty(value = "案件来源")
+    @ExcelProperty(value = "案例来源")
     private String caseSource;
 
     /**
-     * 描述或备注
+     * 案例备注
      */
-    @ExcelProperty(value = "描述或备注")
+    @ExcelProperty(value = "案例备注")
     private String caseRemark;
 
     /**
-     * 过期/激活/删除等标志
+     * 单位状态
      */
-    @ExcelProperty(value = "状态标志")
+    @ExcelProperty(value = "单位状态")
     private Integer unitStatus;
+
+    /**
+     * 创建者
+     */
+    @ExcelProperty(value = "创建者")
+    private String createBy;
+
+    /**
+     * 创建时间
+     */
+    @ExcelProperty(value = "创建时间")
+    private LocalDateTime createTime;
+
+    /**
+     * 更新者
+     */
+    @ExcelProperty(value = "更新者")
+    private String updateBy;
+
+    /**
+     * 更新时间
+     */
+    @ExcelProperty(value = "更新时间")
+    private LocalDateTime updateTime;
 }

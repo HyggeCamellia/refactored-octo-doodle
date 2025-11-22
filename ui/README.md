@@ -1,2 +1,11 @@
-# refactored-octo-doodle
-融合大数据采集、AI推理、前后端开发技术，构建可落地的投资辅助系统，掌握全栈项目开发流程与业务建模思维
+
+# 项目介绍与安装
+
+npm install --verbose
+npm run dev
+
+
+### 或者
+
+pnpm install
+pnpm run dev

@@ -145,7 +145,7 @@ const Login: React.FC = () => {
         await fetchUserInfo();
         console.log('login ok');
         const urlParams = new URL(window.location.href).searchParams;
-        history.push('/crypto/overview');
+        history.push(urlParams.get('redirect') || '/');
         return;
       } else {
         console.log(response.msg);
@@ -194,7 +194,7 @@ const Login: React.FC = () => {
             maxWidth: '75vw',
           }}
           logo={<img alt="logo" src="/logo.svg" />}
-          title="数字货币投资辅助系统"
+          title="软3区1后端开发练习"
           subTitle={intl.formatMessage({ id: 'pages.layouts.userLayout.title' })}
           initialValues={{
             autoLogin: true,

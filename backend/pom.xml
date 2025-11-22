@@ -8,7 +8,7 @@
     <artifactId>ruoyi-wms</artifactId>
     <version>${revision}</version>
 
-    <name>ruoyi-wms</name>
+    <name>ruoyi-react</name>
     <url>https://github.com/jettlu/RuoyiWithReact.git</url>
     <description>ruoyi-react后台管理系统</description>
 
@@ -37,7 +37,6 @@
         <mapstruct-plus.version>1.3.6</mapstruct-plus.version>
         <mapstruct-plus.lombok.version>0.2.0</mapstruct-plus.lombok.version>
         <lombok.version>1.18.32</lombok.version>
-        <lombok.version>1.18.30</lombok.version>
         <bouncycastle.version>1.72</bouncycastle.version>
         <!-- 离线IP地址定位库 -->
         <ip2region.version>2.7.0</ip2region.version>
@@ -50,7 +49,7 @@
         <!-- 插件版本 -->
         <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
         <maven-war-plugin.version>3.2.2</maven-war-plugin.version>
-        <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
+        <maven-compiler-plugin.verison>3.11.0</maven-compiler-plugin.verison>
         <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
         <flatten-maven-plugin.version>1.3.0</flatten-maven-plugin.version>
     </properties>
@@ -335,7 +334,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven-compiler-plugin.version}</version>
+                <version>${maven-compiler-plugin.verison}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>

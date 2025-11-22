@@ -38,12 +38,6 @@
             <artifactId>aws-java-sdk-s3</artifactId>
         </dependency>
 
-        <!-- Spring Boot Test -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
 </project>

@@ -5,8 +5,9 @@ import com.ruoyi.wms.domain.entity.CaseInfo;
 import com.ruoyi.wms.domain.vo.CaseInfoVo;
 
 /**
- * 教学案例信息Mapper接口
+ * 案例信息Mapper接口
+ * 
+ * @author ruoyi
  */
 public interface CaseInfoMapper extends BaseMapperPlus<CaseInfo, CaseInfoVo> {
-
 }

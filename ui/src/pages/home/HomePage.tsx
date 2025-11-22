@@ -12,7 +12,7 @@ const HomePage = () => {
 
     return (
         <div className={styles.container} style={{ backgroundImage: `url(${homeJpeg})` }}>
-            <div className={styles.title}>软件开发前后端融合学习平台</div>
+            <div className={styles.title}>AI驱动数字货币投资辅助系统平台</div>
             <div className={styles.menuGrid}>
                 {/* 左上：基础信息管理 */}
                 <div className={`${styles.menuItem} ${styles.topLeft}`}>

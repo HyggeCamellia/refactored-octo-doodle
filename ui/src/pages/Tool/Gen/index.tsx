@@ -4,7 +4,7 @@ import type { FormInstance } from 'antd';
 import React, { useState, useRef } from 'react';
 import { history, FormattedMessage, useAccess } from '@umijs/max';
 import PreviewForm from './components/PreviewCode';
-import type { GenCodeTableListParams, GenCodeType } from './data';
+import type { GenCodeTableListParams, GenCodeType } from './data.d';
 import {
   batchGenCode,
   genCode,

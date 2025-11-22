@@ -6,3 +6,5 @@ import com.ruoyi.wms.domain.entity.Area;
 
 public interface AreaMapper extends BaseMapperPlus<Area, AreaVo> {
 }
+
+

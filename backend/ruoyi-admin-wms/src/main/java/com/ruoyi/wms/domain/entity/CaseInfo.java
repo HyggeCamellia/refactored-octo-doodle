@@ -9,49 +9,56 @@ import lombok.EqualsAndHashCode;
 import java.io.Serial;
 
 /**
- * 教学案例信息对象 case_info
+ * 案例信息实体类
+ * 
+ * @author ruoyi
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
-@TableName("case_info")
+@TableName("wms_case_info")
 public class CaseInfo extends BaseEntity {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
     /**
+     * 主键ID
+     */
+    @TableId(value = "id")
+    private Long id;
+
+    /**
      * 案例编码
      */
-    @TableId(value = "case_code")
     private String caseCode;
 
     /**
-     * 单位名称
+     * 案例名称
      */
     private String caseName;
 
     /**
-     * 承办单位
+     * 承担单位
      */
     private String undertakingUnit;
 
     /**
-     * 案件类型（以AULX_开头的代码）
+     * 案例类型
      */
     private String caseType;
 
     /**
-     * 案件来源（以AULX_开头的代码）
+     * 案例来源
      */
     private String caseSource;
 
     /**
-     * 描述或备注
+     * 案例备注
      */
     private String caseRemark;
 
     /**
-     * 过期/激活/删除等标志
+     * 单位状态
      */
     private Integer unitStatus;
 }

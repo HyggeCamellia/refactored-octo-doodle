@@ -2,7 +2,7 @@ import { Button, Card, message, Layout } from 'antd';
 import React, { useState } from 'react';
 import { history, FormattedMessage } from '@umijs/max';
 import { importTables, queryTableList } from './service';
-import type { GenCodeType } from './data';
+import type { GenCodeType } from './data.d';
 import { ProColumns, ProTable } from '@ant-design/pro-components';
 import { PlusOutlined, RollbackOutlined } from '@ant-design/icons';
 

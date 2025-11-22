@@ -6,7 +6,7 @@
   <artifactId>ruoyi-wms</artifactId>
   <version>5.2.0</version>
   <packaging>pom</packaging>
-  <name>ruoyi-wms</name>
+  <name>ruoyi-react</name>
   <description>ruoyi-react后台管理系统</description>
   <url>https://github.com/jettlu/RuoyiWithReact.git</url>
   <modules>
@@ -16,6 +16,7 @@
   </modules>
   <properties>
     <spring-boot-admin.version>3.2.3</spring-boot-admin.version>
+    <maven-compiler-plugin.verison>3.11.0</maven-compiler-plugin.verison>
     <easyexcel.version>3.3.4</easyexcel.version>
     <dynamic-ds.version>4.3.0</dynamic-ds.version>
     <hutool.version>5.8.27</hutool.version>
@@ -36,11 +37,10 @@
     <maven-jar-plugin.version>3.2.2</maven-jar-plugin.version>
     <java.version>17</java.version>
     <bouncycastle.version>1.72</bouncycastle.version>
-    <maven-compiler-plugin.version>3.11.0</maven-compiler-plugin.version>
     <mybatis-plus.version>3.5.6</mybatis-plus.version>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <revision>5.2.0</revision>
-    <lombok.version>1.18.30</lombok.version>
+    <lombok.version>1.18.32</lombok.version>
     <maven-surefire-plugin.version>3.1.2</maven-surefire-plugin.version>
     <mapstruct-plus.lombok.version>0.2.0</mapstruct-plus.lombok.version>
     <ip2region.version>2.7.0</ip2region.version>
@@ -284,7 +284,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>${maven-compiler-plugin.version}</version>
+        <version>${maven-compiler-plugin.verison}</version>
         <configuration>
           <source>${java.version}</source>
           <target>${java.version}</target>

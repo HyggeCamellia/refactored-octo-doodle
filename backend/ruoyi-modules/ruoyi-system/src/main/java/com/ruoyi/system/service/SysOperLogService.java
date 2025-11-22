@@ -42,10 +42,13 @@ public class SysOperLogService {
     @Async
     @EventListener
     public void recordOper(OperLogEvent operLogEvent) {
-        SysOperLogBo operLog = MapstructUtils.convert(operLogEvent, SysOperLogBo.class);
+        // 直接将事件转换为实体并入库，避免 BO 映射缺失导致的转换异常
+        SysOperLog operLog = MapstructUtils.convert(operLogEvent, SysOperLog.class);
         // 远程查询操作地点
         operLog.setOperLocation(AddressUtils.getRealAddressByIP(operLog.getOperIp()));
-        insertOperlog(operLog);
+        // 设置当前操作时间
+        operLog.setOperTime(LocalDateTime.now());
+        operLogMapper.insert(operLog);
     }
 
     public TableDataInfo<SysOperLogVo> selectPageOperLogList(SysOperLogBo operLog, PageQuery pageQuery) {
@@ -137,3 +140,4 @@ public class SysOperLogService {
         operLogMapper.delete(new LambdaQueryWrapper<>());
     }
 }
+

@@ -76,7 +76,7 @@ export default defineConfig({
    * @name layout 插件
    * @doc https://umijs.org/docs/max/layout-menu
    */
-  title: '数字货币投资辅助系统',
+  title: '软3区1后端开发练习',
   layout: {
     locale: true,
     ...defaultSettings,

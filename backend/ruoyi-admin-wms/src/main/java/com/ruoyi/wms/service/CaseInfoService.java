@@ -15,10 +15,14 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
- * 教学案例信息 Service 业务层处理
+ * 案例信息Service业务层处理
+ *
+ * @author ruoyi
  */
 @RequiredArgsConstructor
 @Service
@@ -27,76 +31,134 @@ public class CaseInfoService {
     private final CaseInfoMapper caseInfoMapper;
 
     /**
-     * 主键精准查询（case_code）
+     * 根据ID查询案例信息（主键精准查询）
      */
-    public CaseInfoVo queryByCode(String caseCode) {
-        return caseInfoMapper.selectVoById(caseCode);
+    public CaseInfoVo queryById(Long id) {
+        return caseInfoMapper.selectVoById(id);
     }
 
     /**
-     * 分页查询（支持模糊查询）
+     * 查询案例信息列表（分页查询）
      */
     public TableDataInfo<CaseInfoVo> queryPageList(CaseInfoBo bo, PageQuery pageQuery) {
-        CaseInfo filter = MapstructUtils.convert(bo, CaseInfo.class);
-        LambdaQueryWrapper<CaseInfo> lqw = buildQueryWrapper(filter);
+        Map<String, Object> params = new HashMap<>();
+        if (bo != null) {
+            if (bo.getId() != null) params.put("id", bo.getId());
+            if (bo.getCaseCode() != null) params.put("caseCode", bo.getCaseCode());
+            if (bo.getCaseName() != null) params.put("caseName", bo.getCaseName());
+            if (bo.getUndertakingUnit() != null) params.put("undertakingUnit", bo.getUndertakingUnit());
+            if (bo.getCaseType() != null) params.put("caseType", bo.getCaseType());
+            if (bo.getCaseSource() != null) params.put("caseSource", bo.getCaseSource());
+            if (bo.getUnitStatus() != null) params.put("unitStatus", bo.getUnitStatus());
+        }
+        LambdaQueryWrapper<CaseInfo> lqw = buildQueryWrapper(params);
         Page<CaseInfoVo> result = caseInfoMapper.selectVoPage(pageQuery.build(), lqw);
         return TableDataInfo.build(result);
     }
 
     /**
-     * 列表查询（支持模糊查询）
+     * 查询案例信息列表（支持模糊查询）
      */
     public List<CaseInfoVo> queryList(CaseInfoBo bo) {
-        CaseInfo filter = MapstructUtils.convert(bo, CaseInfo.class);
-        LambdaQueryWrapper<CaseInfo> lqw = buildQueryWrapper(filter);
+        Map<String, Object> params = new HashMap<>();
+        if (bo != null) {
+            if (bo.getId() != null) params.put("id", bo.getId());
+            if (bo.getCaseCode() != null) params.put("caseCode", bo.getCaseCode());
+            if (bo.getCaseName() != null) params.put("caseName", bo.getCaseName());
+            if (bo.getUndertakingUnit() != null) params.put("undertakingUnit", bo.getUndertakingUnit());
+            if (bo.getCaseType() != null) params.put("caseType", bo.getCaseType());
+            if (bo.getCaseSource() != null) params.put("caseSource", bo.getCaseSource());
+            if (bo.getUnitStatus() != null) params.put("unitStatus", bo.getUnitStatus());
+        }
+        LambdaQueryWrapper<CaseInfo> lqw = buildQueryWrapper(params);
         return caseInfoMapper.selectVoList(lqw);
     }
 
     /**
-     * 新增
+     * 构建查询条件
      */
-    public void insert(CaseInfoBo bo) {
-        CaseInfo entity = MapstructUtils.convert(bo, CaseInfo.class);
-        caseInfoMapper.insert(entity);
-    }
-
-    /**
-     * 修改（按主键 case_code 更新）
-     */
-    public void update(CaseInfoBo bo) {
-        CaseInfo entity = MapstructUtils.convert(bo, CaseInfo.class);
-        caseInfoMapper.updateById(entity);
-    }
-
-    /**
-     * 根据主键删除（单个）
-     */
-    public void deleteByCode(String caseCode) {
-        caseInfoMapper.deleteById(caseCode);
-    }
-
-    /**
-     * 根据主键批量删除
-     */
-    public void deleteByCodes(Collection<String> caseCodes) {
-        caseInfoMapper.deleteBatchIds(caseCodes);
-    }
-
-    /**
-     * 构建查询条件（支持模糊/精准）
-     */
-    private LambdaQueryWrapper<CaseInfo> buildQueryWrapper(CaseInfo filter) {
+    private LambdaQueryWrapper<CaseInfo> buildQueryWrapper(Map<String, Object> params) {
         LambdaQueryWrapper<CaseInfo> lqw = Wrappers.lambdaQuery();
+
         // 主键精准查询
-        lqw.eq(StrUtil.isNotBlank(filter.getCaseCode()), CaseInfo::getCaseCode, filter.getCaseCode());
-        // 模糊查询：单位名称、承办单位、案件类型、案件来源、备注
-        lqw.like(StrUtil.isNotBlank(filter.getCaseName()), CaseInfo::getCaseName, filter.getCaseName());
-        lqw.like(StrUtil.isNotBlank(filter.getUndertakingUnit()), CaseInfo::getUndertakingUnit, filter.getUndertakingUnit());
-        lqw.like(StrUtil.isNotBlank(filter.getCaseType()), CaseInfo::getCaseType, filter.getCaseType());
-        lqw.like(StrUtil.isNotBlank(filter.getCaseSource()), CaseInfo::getCaseSource, filter.getCaseSource());
-        lqw.like(StrUtil.isNotBlank(filter.getCaseRemark()), CaseInfo::getCaseRemark, filter.getCaseRemark());
-        // 精准查询：状态
-        lqw.eq(filter.getUnitStatus() != null, CaseInfo::getUnitStatus, filter.getUnitStatus());
+        if (params.containsKey("id") && params.get("id") != null) {
+            lqw.eq(CaseInfo::getId, params.get("id"));
+        }
+
+        // 案例编码模糊查询
+        if (params.containsKey("caseCode") && StrUtil.isNotBlank((String) params.get("caseCode"))) {
+            lqw.like(CaseInfo::getCaseCode, params.get("caseCode"));
+        }
+
+        // 案例名称模糊查询
+        if (params.containsKey("caseName") && StrUtil.isNotBlank((String) params.get("caseName"))) {
+            lqw.like(CaseInfo::getCaseName, params.get("caseName"));
+        }
+
+        // 承担单位模糊查询
+        if (params.containsKey("undertakingUnit") && StrUtil.isNotBlank((String) params.get("undertakingUnit"))) {
+            lqw.like(CaseInfo::getUndertakingUnit, params.get("undertakingUnit"));
+        }
+
+        // 案例类型精准查询
+        if (params.containsKey("caseType") && StrUtil.isNotBlank((String) params.get("caseType"))) {
+            lqw.eq(CaseInfo::getCaseType, params.get("caseType"));
+        }
+
+        // 案例来源精准查询
+        if (params.containsKey("caseSource") && StrUtil.isNotBlank((String) params.get("caseSource"))) {
+            lqw.eq(CaseInfo::getCaseSource, params.get("caseSource"));
+        }
+
+        // 单位状态精准查询
+        if (params.containsKey("unitStatus") && params.get("unitStatus") != null) {
+            lqw.eq(CaseInfo::getUnitStatus, params.get("unitStatus"));
+        }
+
         return lqw;
+    }
+
+    /**
+     * 新增案例信息
+     */
+    public int insert(CaseInfo caseInfo) {
+        return caseInfoMapper.insert(caseInfo);
+    }
+
+    /**
+     * 通过Bo新增案例信息
+     */
+    public int insertByBo(CaseInfoBo bo) {
+        CaseInfo caseInfo = MapstructUtils.convert(bo, CaseInfo.class);
+        return insert(caseInfo);
+    }
+
+    /**
+     * 修改案例信息
+     */
+    public int update(CaseInfo caseInfo) {
+        return caseInfoMapper.updateById(caseInfo);
+    }
+
+    /**
+     * 通过Bo修改案例信息
+     */
+    public int updateByBo(CaseInfoBo bo) {
+        CaseInfo caseInfo = MapstructUtils.convert(bo, CaseInfo.class);
+        return update(caseInfo);
+    }
+
+    /**
+     * 批量删除案例信息
+     */
+    public int deleteByIds(Collection<Long> ids) {
+        return caseInfoMapper.deleteBatchIds(ids);
+    }
+
+    /**
+     * 删除案例信息
+     */
+    public int deleteById(Long id) {
+        return caseInfoMapper.deleteById(id);
     }
 }

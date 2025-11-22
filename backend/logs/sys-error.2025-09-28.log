@@ -1,2 +1,0 @@
-2025-09-28 08:12:56 [XNIO-1 task-2] ERROR c.r.c.s.h.SaTokenExceptionHandler - 请求地址'/getInfo',认证失败'未能读取到有效 token',无法访问系统资源
-2025-09-28 08:20:46 [XNIO-1 task-2] ERROR c.r.c.w.h.GlobalExceptionHandler - 验证码已失效
