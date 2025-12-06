@@ -88,7 +88,7 @@
     <dependencyManagement>
         <dependencies>
 
-            <!-- common 的依赖配置-->
+            <!-- common 的依赖配置-->    
             <dependency>
                 <groupId>com.ruoyi</groupId>
                 <artifactId>ruoyi-common-bom</artifactId>
