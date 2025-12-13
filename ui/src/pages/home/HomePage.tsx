@@ -38,19 +38,19 @@ const HomePage = () => {
                     </button>
                 </div>
 
-                {/* 左下：智能化集成管理 */}
+                {/* 左下：虚拟货币行情 */}
                 <div className={`${styles.menuItem} ${styles.bottomLeft}`}>
-                    <button onClick={() => navigateToBasicInfo("warehouse-mng")} className={styles.menuButton}>
+                    <button onClick={() => navigateToBasicInfo("currency/market")} className={styles.menuButton}>
                         <UngroupOutlined style={{ fontSize: '5rem' }} />
-                        <div>智能化集成管理</div>
+                        <div>虚拟货币行情</div>
                     </button>
                 </div>
 
-                {/* 右下：预警报警管理 */}
+                {/* 右下：虚拟货币商场 */}
                 <div className={`${styles.menuItem} ${styles.bottomRight}`}>
                     <button onClick={() => navigateToBasicInfo("warehouse-mng")} className={styles.menuButton}>
                         <BulbOutlined style={{ fontSize: '5rem' }} />
-                        <div>预警报警管理</div>
+                        <div>虚拟货币商场</div>
                     </button>
                 </div>
             </div>

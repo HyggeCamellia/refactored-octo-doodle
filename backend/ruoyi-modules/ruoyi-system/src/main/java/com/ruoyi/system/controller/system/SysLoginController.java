@@ -17,6 +17,8 @@ import com.ruoyi.system.service.SysLoginService;
 import com.ruoyi.system.service.SysMenuService;
 import com.ruoyi.system.service.SysUserService;
 import jakarta.validation.constraints.NotBlank;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;

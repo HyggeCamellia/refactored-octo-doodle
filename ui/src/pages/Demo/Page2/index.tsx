@@ -1,96 +1,185 @@
 import React, { useState, useRef } from 'react';
-import { Button, message, Modal, Form } from 'antd';
-import type { FormInstance } from 'antd';
-import { ProTable } from '@ant-design/pro-components';
-import { PlusOutlined } from '@ant-design/icons';
-import type { ProColumns } from '@ant-design/pro-components';
-import DemoForm from './DemoForm';
-import DemoQueryForm from './DemoQueryForm';
-import {
-  listDemo,
-  addDemo,
-  updateDemo,
-  deleteDemo,
-  deleteDemoBatch,
-  getDemoById,
-  type DemoBo,
-  type DemoVo,
-} from '@/services/demo';
+import { useIntl } from '@umijs/max';
+import { Button, message, Modal } from 'antd';
+import { ActionType, FooterToolbar, PageContainer, ProColumns, ProTable } from '@ant-design/pro-components';
+import { PlusOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
+import { listCombined, delCombined, addCombined, updateCombined } from '@/services/wms/combined';
+import EditDrawer from './edit';
 
-const DemoPage: React.FC = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [modalTitle, setModalTitle] = useState('新增演示数据');
-  const [currentRecord, setCurrentRecord] = useState<DemoVo | null>(null);
-  const [form] = Form.useForm<DemoBo>();
-  const [queryForm] = Form.useForm<DemoBo>();
-  const tableRef = useRef<any>(null);
+const handleAdd = async (fields: any) => {
+  const hide = message.loading('正在添加');
+  try {
+    const resp = await addCombined({ ...fields });
+    hide();
+    if (resp.code === 200) {
+      message.success('添加成功');
+    } else {
+      message.error(resp.msg);
+    }
+    return true;
+  } catch (error) {
+    hide();
+    message.error('添加失败请重试！');
+    return false;
+  }
+};
 
-  // 性别映射
-  const genderMap = {
-    1: '男',
-    2: '女',
-  };
+const handleUpdate = async (fields: any) => {
+  const hide = message.loading('正在更新');
+  try {
+    const resp = await updateCombined(fields);
+    hide();
+    if (resp.code === 200) {
+      message.success('更新成功');
+    } else {
+      message.error(resp.msg);
+    }
+    return true;
+  } catch (error) {
+    hide();
+    message.error('更新失败请重试！');
+    return false;
+  }
+};
 
-  // 表格列定义
-  const columns: ProColumns<DemoVo>[] = [
+const handleRemove = async (selectedRows: any[]) => {
+  const hide = message.loading('正在删除');
+  if (!selectedRows) return true;
+  try {
+    // 由于后端可能只支持单个删除，这里循环删除
+    for (const row of selectedRows) {
+      await delCombined(String(row.assetId));
+    }
+    hide();
+    message.success('删除成功，即将刷新');
+    return true;
+  } catch (error) {
+    hide();
+    message.error('删除失败，请重试');
+    return false;
+  }
+};
+
+const CombinedDataTable: React.FC = () => {
+  const [drawerVisible, setDrawerVisible] = useState<boolean>(false);
+  const actionRef = useRef<ActionType>();
+  const [currentRow, setCurrentRow] = useState<any>();
+  const [selectedRows, setSelectedRows] = useState<any[]>([]);
+
+  const columns: ProColumns<any>[] = [
+    // 资产表字段
     {
-      title: 'ID',
-      dataIndex: 'id',
-      key: 'id',
+      title: '资产ID',
+      dataIndex: 'assetId',
+      valueType: 'text',
       width: 80,
     },
     {
-      title: '演示名称',
-      dataIndex: 'demoName',
-      key: 'demoName',
-      search: false,
+      title: '资产名称',
+      dataIndex: 'assetName',
+      valueType: 'text',
+      search: true,
     },
     {
-      title: '演示年龄',
-      dataIndex: 'demoAge',
-      key: 'demoAge',
-      width: 100,
+      title: '资产简写',
+      dataIndex: 'assetAbbreviation',
+      valueType: 'text',
     },
     {
-      title: '演示性别',
-      dataIndex: 'demoGender',
-      key: 'demoGender',
-      width: 100,
-      valueEnum: {
-        1: { text: '男', status: 'Success' },
-        2: { text: '女', status: 'Default' },
+      title: '资产价格',
+      dataIndex: 'assetPrice',
+      valueType: 'text',
+    },
+    {
+      title: '资产市值',
+      dataIndex: 'assetMarketValue',
+      valueType: 'text',
+    },
+    {
+      title: '24小时涨跌幅',
+      dataIndex: 'assetChange24h',
+      valueType: 'text',
+      render: (_, record) => {
+        const value = record.assetChange24h;
+        if (!value) return '-';
+        return (
+          <span style={{ color: value > 0 ? '#f5222d' : value < 0 ? '#52c41a' : '#8c8c8c' }}>
+            {value > 0 ? '+' : ''}{value}%
+          </span>
+        );
       },
     },
+    // 投资建议表字段
     {
-      title: '备注',
-      dataIndex: 'remark',
-      key: 'remark',
+      title: '建议类型',
+      dataIndex: 'suggestionType',
+      valueType: 'text',
+    },
+    {
+      title: '建议内容',
+      dataIndex: 'suggestionContent',
+      valueType: 'text',
       ellipsis: true,
+      width: 200,
+    },
+    // 用户表字段
+    {
+      title: '用户名',
+      dataIndex: 'username',
+      valueType: 'text',
+      search: true,
     },
     {
-      title: '创建时间',
-      dataIndex: 'createTime',
-      key: 'createTime',
-      valueType: 'dateTime',
+      title: '手机号',
+      dataIndex: 'phone',
+      valueType: 'text',
     },
+    {
+      title: '用户状态',
+      dataIndex: 'status',
+      valueType: 'select',
+      valueEnum: {
+        1: { text: '正常', status: 'Success' },
+        0: { text: '禁用', status: 'Default' },
+      },
+    },
+    // 操作列
     {
       title: '操作',
+      dataIndex: 'option',
+      width: '180px',
       valueType: 'option',
-      key: 'option',
-      width: 150,
       render: (_, record) => [
         <Button
-          key="edit"
           type="link"
-          onClick={() => handleEdit(record)}
+          size="small"
+          key="edit"
+          onClick={() => {
+            setCurrentRow(record);
+            setDrawerVisible(true);
+          }}
         >
-          编辑
+          修改
         </Button>,
         <Button
-          key="delete"
           type="link"
+          size="small"
           danger
-          onClick={() => handleDelete(record.id)}
+          key="delete"
+          onClick={async () => {
+            Modal.confirm({
+              title: '删除',
+              content: `确认删除资产【${record.assetName}】吗？`,
+              okText: '确认',
+              cancelText: '取消',
+              onOk: async () => {
+                const success = await handleRemove([record]);
+                if (success && actionRef.current) {
+                  actionRef.current.reload();
+                }
+              },
+            });
+          }}
         >
           删除
         </Button>,
@@ -98,192 +187,104 @@ const DemoPage: React.FC = () => {
     },
   ];
 
-  // 处理新增
-  const handleAdd = () => {
-    setModalTitle('新增演示数据');
-    setCurrentRecord(null);
-    form.resetFields();
-    setModalVisible(true);
-  };
-
-  // 处理编辑
-  const handleEdit = async (record: DemoVo) => {
-    setModalTitle('编辑演示数据');
-    setCurrentRecord(record);
-    // 重置表单并设置初始值
-    form.resetFields();
-    form.setFieldsValue({
-      id: record.id, // 保持原始类型，后端会自动处理类型转换
-      demoName: record.demoName,
-      demoAge: record.demoAge,
-      demoGender: record.demoGender,
-      remark: record.remark,
-    });
-    setModalVisible(true);
-  };
-
-  // 处理删除
-  const handleDelete = (id: string) => {
-    Modal.confirm({
-      title: '确认删除',
-      content: '确定要删除这条记录吗？',
-      onOk: async () => {
-        try {
-          await deleteDemo(Number(id));
-          message.success('删除成功');
-          tableRef.current?.reload();
-        } catch (error) {
-          message.error('删除失败');
-        }
-      },
-    });
-  };
-
-  // 处理批量删除
-  const handleBatchDelete = (ids: (string | number)[]) => {
-    Modal.confirm({
-      title: '批量删除',
-      content: `确定要删除选中的 ${ids.length} 条记录吗？`,
-      onOk: async () => {
-        try {
-          await deleteDemoBatch(ids.map(id => Number(id)));
-          message.success('批量删除成功');
-          tableRef.current?.reload();
-        } catch (error) {
-          message.error('批量删除失败');
-        }
-      },
-    });
-  };
-
-  // 处理提交表单
-  const handleSubmit = async () => {
-    try {
-      const values = await form.validateFields();
-
-      if (currentRecord) {
-        // 更新操作
-        await updateDemo(values);
-        message.success('更新成功');
-      } else {
-        // 新增操作
-        await addDemo(values);
-        message.success('新增成功');
-      }
-
-      setModalVisible(false);
-      tableRef.current?.reload();
-    } catch (error) {
-      // 表单验证失败不提示错误
-    }
-  };
-
-  // 处理搜索
-  const handleSearch = () => {
-    tableRef.current?.reload();
-  };
-
-  // 处理重置
-  const handleReset = () => {
-    queryForm.resetFields();
-    tableRef.current?.reload();
-  };
-
-  // 获取表格数据
-  const fetchData = async (params: any) => {
-    const queryParams = queryForm.getFieldsValue() || {};
-    const result = await listDemo(queryParams as DemoBo, {
-      page: params.current,
-      pageSize: params.pageSize,
-    });
-    return {
-      data: result.data.rows, // 使用 rows 替代 list
-      success: true,
-      total: result.data.total,
-    };
-  };
-
   return (
-    <div className="demo-page">
-      <DemoQueryForm
-        form={queryForm}
-        onSearch={handleSearch}
-        onReset={handleReset}
-      />
-      
-      <ProTable
-        ref={tableRef}
-        columns={columns}
-        request={fetchData}
-        rowKey="id"
-        tableAlertRender={({ selectedRowKeys }) => (
-          <div>
-            已选择 {selectedRowKeys.length} 项
-            {selectedRowKeys.length > 0 && (
-              <Button
-                danger
-                className="ml-2"
-                onClick={() => handleBatchDelete(selectedRowKeys as number[])}
-              >
-                批量删除
-              </Button>
-            )}
-          </div>
-        )}
-        tableAlertOptionRender={({ selectedRowKeys }) => (
-          <div>
-            {selectedRowKeys.length > 0 && (
-              <Button
-                danger
-                onClick={() => handleBatchDelete(selectedRowKeys as number[])}
-              >
-                批量删除
-              </Button>
-            )}
-          </div>
-        )}
-        rowSelection={{
-          columnWidth: 40,
+    <PageContainer>
+      <ProTable<any>
+        headerTitle="合并数据列表"
+        actionRef={actionRef}
+        rowKey="assetId"
+        search={{
+          labelWidth: 120,
         }}
-        expandable={{
-          expandedRowRender: (record) => (
-            <div className="p-4">
-              <p>ID: {record.id}</p>
-              <p>名称: {record.demoName}</p>
-              <p>年龄: {record.demoAge}</p>
-              <p>性别: {genderMap[record.demoGender as keyof typeof genderMap] || '未知'}</p>
-              <p>备注: {record.remark || '-'}</p>
-              <p>创建时间: {record.createTime}</p>
-              <p>更新时间: {record.updateTime}</p>
-            </div>
-          ),
-        }}
-        toolBarRender={() => (
-          <Button type="primary" onClick={handleAdd}>
+        toolBarRender={() => [
+          <Button
+            type="primary"
+            key="add"
+            onClick={() => {
+              setCurrentRow(undefined);
+              setDrawerVisible(true);
+            }}
+          >
             <PlusOutlined /> 新增
-          </Button>
-        )}
-        pagination={{
-          pageSize: 10,
-          showSizeChanger: true,
-          showTotal: (total) => `共 ${total} 条记录`,
+          </Button>,
+        ]}
+        request={async (params) => {
+          const res = await listCombined({
+            ...params,
+            current: String(params.current),
+            pageSize: String(params.pageSize),
+          });
+          return {
+            data: res.rows || [],
+            total: res.total || 0,
+            success: true,
+          };
+        }}
+        columns={columns}
+        rowSelection={{
+          onChange: (_, selectedRows) => {
+            setSelectedRows(selectedRows);
+          },
         }}
       />
 
-      {/* 新增/编辑模态框 */}
-      <Modal
-        title={modalTitle}
-        open={modalVisible}
-        onOk={handleSubmit}
-        onCancel={() => setModalVisible(false)}
-        okText="确定"
-        cancelText="取消"
-        width={600}
-      >
-        <DemoForm form={form} />
-      </Modal>
-    </div>
+      {selectedRows?.length > 0 && (
+        <FooterToolbar
+          extra={
+            <div>
+              已选择 <a style={{ fontWeight: 600 }}>{selectedRows.length}</a> 项
+            </div>
+          }
+        >
+          <Button
+            danger
+            key="batchRemove"
+            onClick={async () => {
+              Modal.confirm({
+                title: '是否确认删除所选数据项?',
+                icon: <ExclamationCircleOutlined />,
+                content: '请谨慎操作',
+                async onOk() {
+                  const success = await handleRemove(selectedRows);
+                  if (success) {
+                    setSelectedRows([]);
+                    actionRef.current?.reloadAndRest?.();
+                  }
+                },
+                onCancel() { },
+              });
+            }}
+          >
+            <DeleteOutlined /> 批量删除
+          </Button>
+        </FooterToolbar>
+      )}
+
+      <EditDrawer
+        onSubmit={async (values) => {
+          let success = false;
+          if (values.assetId) {
+            success = await handleUpdate(values);
+          } else {
+            success = await handleAdd(values);
+          }
+          if (success) {
+            setDrawerVisible(false);
+            setCurrentRow(undefined);
+            if (actionRef.current) {
+              actionRef.current.reload();
+            }
+          }
+        }}
+        onClose={() => {
+          setDrawerVisible(false);
+          setCurrentRow(undefined);
+        }}
+        visible={drawerVisible}
+        values={currentRow || {}}
+      />
+    </PageContainer>
   );
 };
 
-export default DemoPage;
+export default CombinedDataTable;

@@ -34,6 +34,11 @@ export default [
     ]
   },
   {
+    name: '虚拟货币行情',
+    path: '/currency/market',
+    component: './currency/CurrencyMarket',
+  },
+  {
     path: '*',
     layout: false,
     component: './404',

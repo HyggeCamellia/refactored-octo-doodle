@@ -89,6 +89,8 @@ public class LogAspect {
             // *========数据库日志=========*//
             OperLogEvent operLog = new OperLogEvent();
             operLog.setStatus(BusinessStatus.SUCCESS.ordinal());
+            // 设置操作时间
+            operLog.setOperTime(java.time.LocalDateTime.now());
             // 请求的地址
             String ip = ServletUtils.getClientIP();
             operLog.setOperIp(ip);
