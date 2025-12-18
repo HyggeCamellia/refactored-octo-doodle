@@ -18,6 +18,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import cn.dev33.satoken.annotation.SaIgnore;
 
 import java.util.List;
 
@@ -27,9 +28,11 @@ import java.util.List;
  * @author zcc
  * @date 2024-07-22
  */
+
 @Validated
 @RequiredArgsConstructor
 @RestController
+@SaIgnore
 @RequestMapping("/inventoryDetails")
 public class InventoryDetailController extends BaseController {
 
@@ -56,6 +59,7 @@ public class InventoryDetailController extends BaseController {
      */
     @Log(title = "库存详情", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
+    @SaIgnore
     public void export(InventoryDetailBo bo, HttpServletResponse response) {
         List<InventoryDetailVo> list = inventoryDetailService.queryList(bo);
         ExcelUtil.exportExcel(list, "库存详情", InventoryDetailVo.class, response);
